@@ -1,5 +1,5 @@
-import scrapy
 import redis
+import scrapy
 from scrapy.crawler import CrawlerProcess
 
 
@@ -18,9 +18,16 @@ class SPRECCSpider(scrapy.Spider):
                 yield response.follow(next_url, callback=self.parse_detail)
 
     def parse_detail(self, response):
-        detail = response.xpath('//epointform').extract_first()
-        print(detail)
-        pass
+        content = response.xpath(
+            '//epointform//table[@id="_Sheet1"]')
+        text = content.extract_first()
+        # trs = content.xpath('.//tr[not(contains(@style, "FONT-SIZE: 0px; LINE-HEIGHT: 0px"))]')
+        # l = len(trs)
+        name = content.xpath('.//td[text()="项目及标段名称"]/following-sibling::td/text()').extract_first()
+        owner = content.xpath('.//td[text()="项目业主"]/following-sibling::td/text()').extract_first()
+        owner_phone = content.xpath('.//td[text()="项目业主联系电话"]/following-sibling::td/text()').extract_first()
+        yield {'text': text, 'name': name, 'owner': owner, 'owner_phone': owner_phone}
+
 
 if __name__ == "__main__":
     process = CrawlerProcess()

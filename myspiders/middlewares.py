@@ -49,6 +49,7 @@ class MySpiderMiddleware(object):
         # that it doesn’t have a response associated.
 
         # Must return only requests (not items).
+        print("====aaaa")
         for r in start_requests:
             yield r
 
