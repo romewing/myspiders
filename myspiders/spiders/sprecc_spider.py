@@ -1,12 +1,13 @@
-import redis
+# -*- coding: utf-8 -*-
+
 import scrapy
 from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
 
 
 class SPRECCSpider(scrapy.Spider):
     name = "sprecc"
     start_urls = ['http://www.spprec.com/sczw/jyfwpt/005001/005001003/']
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
     def parse(self, response):
         trs = response.xpath(
@@ -30,6 +31,6 @@ class SPRECCSpider(scrapy.Spider):
 
 
 if __name__ == "__main__":
-    process = CrawlerProcess()
+    process = CrawlerProcess(get_project_settings())
     process.crawl(SPRECCSpider)
     process.start()

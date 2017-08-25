@@ -21,7 +21,6 @@ class KafkaPipeline(object):
 
     def process_item(self, item, spider):
         self.producer.send(self.kafka_topic, value=item)
-        print("==========发送消息")
         return item
 
     def open_spider(self, spider):
