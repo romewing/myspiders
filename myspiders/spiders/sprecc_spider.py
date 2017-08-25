@@ -22,8 +22,6 @@ class SPRECCSpider(scrapy.Spider):
         content = response.xpath(
             '//epointform//table[@id="_Sheet1"]')
         text = content.extract_first()
-        # trs = content.xpath('.//tr[not(contains(@style, "FONT-SIZE: 0px; LINE-HEIGHT: 0px"))]')
-        # l = len(trs)
         name = content.xpath('.//td[text()="项目及标段名称"]/following-sibling::td/text()').extract_first()
         owner = content.xpath('.//td[text()="项目业主"]/following-sibling::td/text()').extract_first()
         owner_phone = content.xpath('.//td[text()="项目业主联系电话"]/following-sibling::td/text()').extract_first()

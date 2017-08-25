@@ -16,6 +16,7 @@ class RedisDupeFilter(scrapy.dupefilters.BaseDupeFilter):
         return cls(redis.Redis(host=redis_host, port=redis_port, db=redis_db), redis_key_url)
 
     def request_seen(self, request):
+        #request = request_fingerprint(request)
         url = request.url
         if self.server.sismember(self.key, request.url):
             return True
