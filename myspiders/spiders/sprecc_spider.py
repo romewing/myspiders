@@ -16,7 +16,7 @@ class SPRECCSpider(scrapy.Spider):
             url = tr.xpath('./td[@align="left"]/a/@href').extract_first()
             if url is not None:
                 next_url = response.urljoin(url)
-                yield response.follow(next_url, callback=self.parse_detail)
+                yield response.follow(next_url, callback=self.parse_detail, meta={"spider": self.name})
 
     def parse_detail(self, response):
         content = response.xpath(

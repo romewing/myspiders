@@ -1,13 +1,5 @@
-import tensorflow as tf
+import  time
 
-state=tf.Variable(0,name='counter')
-one=tf.constant(1)
-new_value=tf.add(state,one)
-update=tf.assign(state,new_value)
-init=tf.global_variables_initializer()# 初始化非常重要！！！！！
-with tf.Session() as sess:
-    sess.run(init)# 一定要运行这一句！！！！！！
-    for _ in range(3):
-        sess.run(update)
-        print(sess.run(state))
+for _ in range(5):
+    print(time.time())
 

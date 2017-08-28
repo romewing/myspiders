@@ -46,7 +46,7 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    #    'myspiders.middlewares.MySpiderMiddleware': 543,
+    # 'myspiders.middlewares.MySpiderMiddleware': 543,
 }
 
 # Enable or disable downloader middlewares
@@ -66,7 +66,6 @@ SPIDER_MIDDLEWARES = {
 ITEM_PIPELINES = {
     'myspiders.pipelines.KafkaPipeline': 300,
 }
-
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -89,5 +88,5 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 DUPEFILTER_CLASS = "myspiders.dupefilter.RedisDupeFilter"
-REDIS_HOST = '192.168.3.51'
+REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
