@@ -24,7 +24,8 @@ class KafkaPipeline(object):
         return item
 
     def open_spider(self, spider):
-        self.producer = KafkaProducer(bootstrap_servers = self.kafka_host, value_serializer=lambda v: json.dumps(v, ensure_ascii=False).encode('UTF-8'))
+        self.producer = KafkaProducer(bootstrap_servers=self.kafka_host,
+                                      value_serializer=lambda v: json.dumps(v, ensure_ascii=False).encode('UTF-8'))
 
     def close_spider(self, spider):
         self.producer.close()
