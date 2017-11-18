@@ -50,6 +50,6 @@ class RedisSortedSetDupeFilter(scrapy.dupefilters.BaseDupeFilter):
             key = self.prefix+spider
             if self.server.zrank(key, url) is not None:
                 return True
-            else :
+            else:
                 self.server.zadd(key, url, time.time())
                 return False

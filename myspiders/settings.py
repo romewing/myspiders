@@ -87,6 +87,10 @@ ITEM_PIPELINES = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-DUPEFILTER_CLASS = "myspiders.dupefilter.RedisSortedSetDupeFilter"
-REDIS_HOST = '127.0.0.1'
+DUPEFILTER_CLASS = 'myspiders.dupefilter.RedisSortedSetDupeFilter'
+REDIS_HOST = '120.77.37.36'
 REDIS_PORT = 6379
+
+
+KAFKA_TOPIC = 'scrapy'
+KAFKA_HOST = '120.77.37.36:9092'

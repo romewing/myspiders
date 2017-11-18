@@ -18,6 +18,7 @@ class KafkaPipeline(object):
     def __init__(self, kafka_topic, kafka_host):
         self.kafka_topic = kafka_topic
         self.kafka_host = kafka_host
+        self.producer = None
 
     def process_item(self, item, spider):
         self.producer.send(self.kafka_topic, value=item)
