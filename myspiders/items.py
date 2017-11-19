@@ -8,7 +8,9 @@
 import scrapy
 
 
-class ProjectItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class BidedItem(scrapy.Item):
+    name = scrapy.Field()
+    url = scrapy.Field()
+    content = scrapy.Field()
+    owner = scrapy.Field()
+    owner_phone = scrapy.Field()

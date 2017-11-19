@@ -17,7 +17,6 @@ class RedisSetDupeFilter(scrapy.dupefilters.BaseDupeFilter):
         return cls(redis.Redis(host=redis_host, port=redis_port, db=redis_db), redis_key_url)
 
     def request_seen(self, request):
-        #request = request_fingerprint(request)
         spider = request.meta['spider']
         if spider is not None:
             url = request.url

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
+from myspiders.items import BidedItem
 
 
 class SPRECCSpider(scrapy.Spider):
@@ -19,16 +18,11 @@ class SPRECCSpider(scrapy.Spider):
                 yield response.follow(next_url, callback=self.parse_detail, meta={"spider": self.name})
 
     def parse_detail(self, response):
-        content = response.xpath(
-            '//epointform//table[@id="_Sheet1"]')
-        text = content.extract_first()
-        name = content.xpath('.//td[text()="项目及标段名称"]/following-sibling::td/text()').extract_first()
-        owner = content.xpath('.//td[text()="项目业主"]/following-sibling::td/text()').extract_first()
-        owner_phone = content.xpath('.//td[text()="项目业主联系电话"]/following-sibling::td/text()').extract_first()
-        yield {'text': text, 'name': name, 'owner': owner, 'owner_phone': owner_phone}
+        value = response.xpath('//epointform//table[@id="_Sheet1"]')
+        item = BidedItem()
+        item.content = value.extract_first()
+        item.name = value.xpath('.//td[text()="项目及标段名称"]/following-sibling::td/text()').extract_first()
+        item.owner = value.xpath('.//td[text()="项目业主"]/following-sibling::td/text()').extract_first()
+        item.owner_phone = value.xpath('.//td[text()="项目业主联系电话"]/following-sibling::td/text()').extract_first()
+        yield item
 
-
-if __name__ == "__main__":
-    process = CrawlerProcess(get_project_settings())
-    process.crawl(SPRECCSpider)
-    process.start()
