@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
+from scrapy.crawler import CrawlerProcess
+from scrapy.utils.project import get_project_settings
+
 from myspiders.items import BidedItem
 
 
@@ -26,3 +29,8 @@ class SPRECCSpider(scrapy.Spider):
         item['owner_phone'] = value.xpath('.//td[text()="项目业主联系电话"]/following-sibling::td/text()').extract_first()
         yield item
 
+
+if __name__ == "__main__":
+    process = CrawlerProcess(get_project_settings())
+    process.crawl(SPRECCSpider)
+    process.start()
