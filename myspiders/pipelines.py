@@ -21,7 +21,8 @@ class KafkaPipeline(object):
         self.producer = None
 
     def process_item(self, item, spider):
-        result = self.producer.send(self.kafka_topic, value=item)
+        result = self.producer.send(self.kafka_topic, value=dict(item))
+        type(spider)
         print(result)
         return item
 
